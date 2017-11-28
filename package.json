@@ -19,7 +19,7 @@
     "vue-router": "^2.3.1",
     "vuetify": "^0.12.7",
     "vuex": "^2.3.1",
-    "vuex-class": "^0.2.0"
+    "vuex-typex": "^1.0.5"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -80,6 +80,8 @@
     "sw-precache-webpack-plugin": "^0.9.1",
     "ts-loader": "^2.1.0",
     "typescript": "^2.4.0",
+    "uglify-js": "^2.8.29",
+    "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.8",
     "vue-loader": "^12.1.0",
     "vue-style-loader": "^3.0.1",

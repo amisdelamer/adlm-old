@@ -1,5 +1,5 @@
 <template>
-  <form class="form">
+  <form class="form" @submit.prevent="login">
     <v-card>
       <v-card-row>
         <v-card-title>Connexion</v-card-title>
@@ -10,6 +10,8 @@
           name="email"
           label="Email"
           :disabled="loading"
+          :value="username"
+          @input="inputUsername"
         ></v-text-field>
 
         <v-text-field
@@ -19,14 +21,16 @@
           :append-icon-cb="togglePassword"
           :type="passwordVisible ? 'text' : 'password'"
           :disabled="loading"
+          :value="password"
+          @input="inputPassword"
         ></v-text-field>
       </v-card-text>
 
       <v-card-row actions>
         <v-btn
-          @click.native="login"
           :disabled="loading"
           :loading="loading"
+          :type="'submit'"
         >Se connecter</v-btn>
       </v-card-row>
       <v-card-row actions>
@@ -42,27 +46,29 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import LoginModule from './LoginModule'
 
-@Component({
-  props: {
-    passwordVisible: Boolean,
-    loading: Boolean
-  }
-})
+@Component
 export default class Login extends Vue {
-  passwordVisible = false
+  get username () { return LoginModule.state.username }
+  get password () { return LoginModule.state.password }
+  get loading () { return LoginModule.state.loading }
+  get passwordVisible () { return LoginModule.state.passwordVisible }
 
-  loading = false
+  inputUsername (value: string) {
+    LoginModule.inputUsername(value)
+  }
 
-  login () {
-    this.loading = true
-    setTimeout(() => {
-      this.loading = false
-    }, 2000)
+  inputPassword (value: string) {
+    LoginModule.inputPassword(value)
   }
 
   togglePassword () {
-    this.passwordVisible = !this.passwordVisible
+    LoginModule.togglePassword()
+  }
+
+  login () {
+    LoginModule.login()
   }
 }
 </script>
